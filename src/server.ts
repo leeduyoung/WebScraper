@@ -5,7 +5,7 @@ import compression from "compression";
 
 export class Server
 {
-    public app: express.Express;
+    public app: express.Express = null;
 
     public constructor()
     {
