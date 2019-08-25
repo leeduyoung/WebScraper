@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import * as cheerio from "cheerio";
 import * as Fs from "fs";
 import * as Path from "path";
+import { Server } from "./server";
 
 async function main(): Promise<void>
 {
@@ -9,37 +10,40 @@ async function main(): Promise<void>
     
     try
     {
-        let url: string = process.argv[2];
-        let html = await getHtml(url);
+        let server: Server = new Server();
+        await server.listen();
+
+        // let url: string = process.argv[2];
+        // let html = await getHtml(url);
         
-        if (html.status !== 200)
-            throw new Error(`Failed to get html file. url: ${url}`);
+        // if (html.status !== 200)
+        //     throw new Error(`Failed to get html file. url: ${url}`);
             
-        // CHEERIO LOAD HTML
-        let $ = cheerio.load(html.data);
+        // // CHEERIO LOAD HTML
+        // let $ = cheerio.load(html.data);
 
-        let title: string = $("div.htitle span.itemSubjectBoldfont").text();
-        let photoList: string[] = [];
-        $("p img._photoImage").each((index: number, element: CheerioElement) => {
+        // let title: string = $("div.htitle span.itemSubjectBoldfont").text();
+        // let photoList: string[] = [];
+        // $("p img._photoImage").each((index: number, element: CheerioElement) => {
 
-            if (element.attribs && element.attribs.src)
-            {
-                let src: string = element.attribs.src;
-                photoList[index] = src.substring(0, src.lastIndexOf("?"));
-            }
-        });
+        //     if (element.attribs && element.attribs.src)
+        //     {
+        //         let src: string = element.attribs.src;
+        //         photoList[index] = src.substring(0, src.lastIndexOf("?"));
+        //     }
+        // });
 
-        // SAVE FILES
-        if (!Fs.existsSync(`photos/`))
-            Fs.mkdirSync(`photos`);
+        // // SAVE FILES
+        // if (!Fs.existsSync(`photos/`))
+        //     Fs.mkdirSync(`photos`);
 
-        if (!Fs.existsSync(`photos/${title}`))
-            Fs.mkdirSync(`photos/${title}`);
+        // if (!Fs.existsSync(`photos/${title}`))
+        //     Fs.mkdirSync(`photos/${title}`);
 
-        for (let i = 0; i < photoList.length; i++)
-            download(i, photoList[i], title);
+        // for (let i = 0; i < photoList.length; i++)
+        //     download(i, photoList[i], title);
 
-        console.log("웹 스크래핑이 완료되었습니다.");
+        // console.log("웹 스크래핑이 완료되었습니다.");
     }
     catch (err)
     {
