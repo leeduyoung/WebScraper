@@ -47,6 +47,7 @@ async function main(): Promise<void>
         console.log(err);
     }
 }
+// START WEB SCAPING
 main();
 
 async function getHtml(url: string): Promise<AxiosResponse<any>>
