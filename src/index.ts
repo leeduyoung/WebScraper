@@ -10,7 +10,6 @@ async function main(): Promise<void>
     try
     {
         let url: string = process.argv[2];
-        url = "https://blog.naver.com/sondosik/221618818316";
         let html = await getHtml(url);
         
         if (html.status !== 200)
