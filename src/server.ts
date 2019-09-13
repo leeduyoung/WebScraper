@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
+import { api } from "./routes";
 
 export class Server
 {
@@ -17,6 +18,9 @@ export class Server
         this.app.use(express.static('public'));
         this.app.use(compression());
         this.app.use(helmet());
+     
+        // 라우팅
+        this.app.use('/api', api);
     }
     public async listen(): Promise<void>
     {

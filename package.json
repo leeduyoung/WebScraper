@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon --watch src --exec 'ts-node' src/index.ts",
     "dev": "tsc & node bin/",
     "build": "tsc",
     "start": "node bin/"
@@ -27,6 +28,8 @@
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.1",
     "@types/helmet": "0.0.44",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   }
 }
